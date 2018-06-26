@@ -1,7 +1,7 @@
 @extends("layouts.app")
 @section("title", "Welcome ─ Laravel")
 @section("content")
-<div class="jumbotron text-center">
+<div class="mt-5 jumbotron text-center">
     <h1>Raul Anaya</h1>
     <nav>
         <ul class="nav nav-pills">
@@ -32,10 +32,7 @@
 <div class="row">
     @forelse($messages as $message)
     <div class="col-6">
-        <img class="img-thumbnail" src="{{$message->image}}" alt="{{$message->id}}">
-        <p class="card-text">{{$message->content}}
-        <a href="/messages/{{$message->id}}">Read more</a>
-        </p>
+        @include("messages.message")
     </div>
     @empty
     <div class="col-6">

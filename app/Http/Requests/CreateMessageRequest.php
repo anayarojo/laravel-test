@@ -24,7 +24,7 @@ class CreateMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            "message" => ["required", "max:16"]
+            "message" => ["required", "max:150"]
         ];
     }
     
@@ -32,7 +32,7 @@ class CreateMessageRequest extends FormRequest
 
         return[
             "message.required" => "Por favor escribe tu mensaje.",
-            "message.max" => "Por favor escribe un mensaje no mayor a 16 caracteres."
+            "message.max" => "Por favor escribe un mensaje no mayor a 150 caracteres."
         ];
     }
 }
