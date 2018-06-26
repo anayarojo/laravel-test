@@ -11,5 +11,6 @@
 |
 */
 
-Route::get('/', "PagesController@Home");
-Route::get('/about', "PagesController@About");
+Route::get('/', "PagesController@home");
+Route::get('/about', "PagesController@about");
+Route::get('/messages/{message}', "MessagesController@show");

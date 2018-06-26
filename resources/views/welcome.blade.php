@@ -15,13 +15,17 @@
     </nav>
 </div>
 <div class="row">
-    @foreach($messages as $message)
+    @forelse($messages as $message)
     <div class="col-6">
-        <img class="img-thumbnail" src="{{$message["image"]}}" alt="{{$message["id"]}}">
-        <p class="card-text">{{$message["content"]}}
-        <a href="/messages/{{$message["id"]}}">Read more</a>
+        <img class="img-thumbnail" src="{{$message->image}}" alt="{{$message->id}}">
+        <p class="card-text">{{$message->content}}
+        <a href="/messages/{{$message->id}}">Read more</a>
         </p>
     </div>
-    @endforeach
+    @empty
+    <div class="col-6">
+        <p>No hay mensajes destacados.</p>
+    </div>
+    @endforelse
 </div>
 @endsection

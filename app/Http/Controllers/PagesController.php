@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function Home(){
+    public function home(){
 
+        /*
         $messages = [
             [
                 "id" => 1,
@@ -30,13 +32,15 @@ class PagesController extends Controller
                 "image" => "http://lorempixel.com/600/338?4"
             ]
         ];
+        */
+        $messages = Message::all();
     
         return view('welcome', [
             "messages" => $messages
         ]);
     }
 
-    public function About(){
+    public function about(){
         return view("about");
     }
 }
