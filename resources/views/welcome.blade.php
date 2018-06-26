@@ -15,6 +15,21 @@
     </nav>
 </div>
 <div class="row">
+    <div class="col-12">
+        <form action="/messages/create" method="POST">
+            <div class="form-group">
+                {{ csrf_field() }}
+                <input type="text" name="message" class="form-control @if($errors->has("message")) is-invalid @endif" placeholder="¿Que estas pensando?">
+                @if($errors->any())
+                    @foreach($errors->get("message") as $error)
+                    <div class="invalid-feedback">{{$error}}</div>
+                    @endforeach
+                @endif
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
     @forelse($messages as $message)
     <div class="col-6">
         <img class="img-thumbnail" src="{{$message->image}}" alt="{{$message->id}}">
