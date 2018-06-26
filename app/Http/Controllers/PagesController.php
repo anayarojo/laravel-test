@@ -33,7 +33,7 @@ class PagesController extends Controller
             ]
         ];
         */
-        $messages = Message::all();
+        $messages = Message::paginate(10);
     
         return view('welcome', [
             "messages" => $messages
