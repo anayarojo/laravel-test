@@ -1,27 +1,27 @@
 @extends("layouts.app")
 @section("title", "Welcome ─ Laravel")
 @section("content")
-<div class="title m-b-md">
-    Raul Anaya
+<div class="jumbotron text-center">
+    <h1>Raul Anaya</h1>
+    <nav>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+        </ul>
+    </nav>
 </div>
-
-@if(isset($job_title))
-<p>
-    {{$job_title}}
-</p>
-@endif
-<br/>
-
-<div class="links">
-    @foreach($links as $link => $text)
-    <a href="{{$link}}">{{$text}}</a>
+<div class="row">
+    @foreach($messages as $message)
+    <div class="col-6">
+        <img class="img-thumbnail" src="{{$message["image"]}}" alt="{{$message["id"]}}">
+        <p class="card-text">{{$message["content"]}}
+        <a href="/messages/{{$message["id"]}}">Read more</a>
+        </p>
+    </div>
     @endforeach
-    <!--
-    <a href="https://laravel.com/docs">Documentation</a>
-    <a href="https://laracasts.com">Laracasts</a>
-    <a href="https://laravel-news.com">News</a>
-    <a href="https://forge.laravel.com">Forge</a>
-    <a href="https://github.com/laravel/laravel">GitHub</a>
-    -->
 </div>
 @endsection
