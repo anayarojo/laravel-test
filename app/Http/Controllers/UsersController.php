@@ -13,4 +13,18 @@ class UsersController extends Controller
             "user" => $user,
         ]);
     }
+
+    public function follows($username){
+        $user = User::where("username", $username)->first();
+        return view("users.follows", [
+            "user" => $user,
+        ]);
+    }
+
+    public function followers($username){
+        $user = User::where("username", $username)->first();
+        return view("users.followers", [
+            "user" => $user,
+        ]);
+    }
 }
