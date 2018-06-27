@@ -58,6 +58,11 @@
                 </div>
             </div>
         </form>
+        <div class="form-group row mt-3 mb-0">
+            <div class="col-md-8 offset-md-4">
+                <a class="btn btn-primary" href="/auth/facebook">Login with facebook</a>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

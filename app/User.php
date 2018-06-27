@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -27,19 +27,28 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function messages(){
+    public function messages()
+    {
         return $this->hasMany(Message::class)->orderBy("created_at", "desc");
     }
 
-    public function isFollowing(User $user){
+    public function isFollowing(User $user)
+    {
         return $this->follows->contains($user);
     }
 
-    public function follows(){
+    public function socialProfiles()
+    {
+        return $this->hasMany(SocialProfile::class);
+    }
+
+    public function follows()
+    {
         return $this->belongsToMany(User::class, "followers", "user_id", "followed_id");
     }
 
-    public function followers(){
+    public function followers()
+    {
         return $this->belongsToMany(User::class, "followers", "followed_id", "user_id");
     }
 }
