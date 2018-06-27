@@ -8,7 +8,6 @@
         </div>
         <form method="POST" action="{{ route('password.request') }}" aria-label="{{ __('Reset Password') }}">
             @csrf
-
             <input type="hidden" name="token" value="{{ $token }}">
 
             <div class="form-group row">

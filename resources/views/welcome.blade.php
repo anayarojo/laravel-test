@@ -17,8 +17,8 @@
 <div class="row">
     <div class="col-12">
         <form action="/messages/create" method="POST">
+            {{ csrf_field() }}
             <div class="form-group">
-                {{ csrf_field() }}
                 <input type="text" name="message" class="form-control @if($errors->has("message")) is-invalid @endif" placeholder="¿Que estas pensando?">
                 @if($errors->any())
                     @foreach($errors->get("message") as $error)

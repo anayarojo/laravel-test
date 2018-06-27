@@ -52,14 +52,14 @@
 
                                 <div class="dropdown-menu" role="menu">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Salir
-                                        </a>
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        Salir
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
                                 </div>
                             </li>
                         @endif
