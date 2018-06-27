@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->hasMany(Message::class)->orderBy("created_at", "desc");
     }
 
+    public function isFollowing(User $user){
+        return $this->follows->contains($user);
+    }
+
     public function follows(){
         return $this->belongsToMany(User::class, "followers", "user_id", "followed_id");
     }
