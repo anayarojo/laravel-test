@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMessageRequest;
 use App\Message;
+use Illuminate\Http\Request;
 
 class MessagesController extends Controller
 {
     public function show($id)
     {
-        $message = Message::find($id);
+        $message = Message::findOrFail($id);
         return view("messages.show", [
             "message" => $message,
         ]);
@@ -28,5 +29,14 @@ class MessagesController extends Controller
         ]);
 
         return redirect("/messages/" . $message->id);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input("query");
+        $messages = Message::with("user")->where("content", "LIKE", "%$query%")->get();
+        return view("messages.index", [
+            "messages" => $messages,
+        ]);
     }
 }

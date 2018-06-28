@@ -12,8 +12,8 @@
  */
 
 Route::get('/', "PagesController@home");
-
 Route::get('/messages/{message}', "MessagesController@show");
+Route::get('/messages', "MessagesController@search");
 
 Auth::routes();
 Route::get('/auth/facebook', "SocialAuthController@facebook");
