@@ -55,10 +55,7 @@ class UsersController extends Controller
         $me = $request->user();
         $message = $request->input("message");
 
-        $conversation = Conversation::create();
-        $conversation->users()->attach($me);
-        $conversation->users()->attach($user);
-
+        $conversation = Conversation::between($me, $user);
         $privateMessage = PrivateMessage::create([
             "conversation_id" => $conversation->id,
             "user_id" => $me->id,
@@ -70,7 +67,11 @@ class UsersController extends Controller
 
     public function showConversation(Conversation $conversation)
     {
-        dd($conversation);
+        $conversation->load("users", "privateMessages");
+        return view("users.conversation", [
+            "conversation" => $conversation,
+            "user" => auth()->user(),
+        ]);
     }
 
     private function findByUserName($username)
