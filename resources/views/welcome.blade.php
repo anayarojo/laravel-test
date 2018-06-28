@@ -16,7 +16,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <form action="/messages/create" method="POST">
+        <form action="/messages/create" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <input type="text" name="message" class="form-control @if($errors->has("message")) is-invalid @endif" placeholder="¿Que estas pensando?">
@@ -25,6 +25,7 @@
                     <div class="invalid-feedback">{{$error}}</div>
                     @endforeach
                 @endif
+                <input type="file" class="form-control-file" name="image">
             </div>
         </form>
     </div>

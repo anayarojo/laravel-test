@@ -1,5 +1,5 @@
-<img class="img-thumbnail" src="{{$message->image}}" alt="{{$message->id}}">
-<p class="card-text">{{$message->content}}
+<img class="img-thumbnail" src="{{ $message->image }}" alt="{{$message->id}}">
+<p class="card-text">{{ $message->content }}
     <div class="text-muted">
         Escrito por 
         <a href="/users/{{$message->user->username}}">{{$message->user->name}}</a> 
