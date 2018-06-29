@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ExampleTest extends TestCase
 {
@@ -14,8 +13,19 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
+        //Arrage | Preparation
+        //Act | Action
+        //Assert | Verification
+
         $response = $this->get('/');
 
         $response->assertStatus(200);
+        $response->assertSee("Raul Anaya");
+    }
+
+    public function testCanSearchForMessages()
+    {
+        $response = $this->get("/messages/?query=Alice");
+        $response->assertSee("Alice");
     }
 }
