@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function messages()
     {
-        return $this->hasMany(Message::class)->orderBy("created_at", "desc");
+        return $this->hasMany(Message::class)->with("user")->orderBy("created_at", "desc");
     }
 
     public function isFollowing(User $user)

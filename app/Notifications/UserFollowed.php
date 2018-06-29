@@ -2,23 +2,25 @@
 
 namespace App\Notifications;
 
+use App\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
-class user_follow extends Notification
+class UserFollowed extends Notification
 {
     use Queueable;
+
+    public $follower;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $follower)
     {
-        //
+        $this->follower = $follower;
     }
 
     /**
@@ -41,9 +43,11 @@ class user_follow extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject("You have a new follower")
+            ->greeting("Hello" . $notifiable->name)
+            ->line("The user @" . $this->follower->username . " is following")
+            ->action('Show profile', url('http://localhost:8000/users/' . $this->follower->username))
+            ->salutation("Thanks for use anayarojo");
     }
 
     /**
