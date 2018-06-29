@@ -10,6 +10,7 @@ class PagesController extends Controller
     public function home(){
 
         $messages = Message::latest()->paginate(10);
+        $messages->load("user");
     
         return view('welcome', [
             "messages" => $messages
