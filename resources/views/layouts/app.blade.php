@@ -12,11 +12,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix("css/app.css") }}">
-    <!--<link rel="stylesheet" 
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" 
-        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" 
-        crossorigin="anonymous">-->
-
+    
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -26,58 +22,56 @@
 </head>
 <body>
     <div id="app" class="container">
-        <nav class="navbar navbar-light static-top navbar-toggleable-md bg-faded">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <form action="/messages">
+                            <div class="input-group">
+                                <input type="text" name="query" class="form-control" placeholder="Buscar" required>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-outline-primary">Buscar</button>
+                                </span>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
                         <li class="nav-item">
-                            <form action="/messages">
-                                <div class="input-group">
-                                    <input type="text" name="query" class="form-control" placeholder="Buscar" required>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-outline-primary">Buscar</button>
-                                    </span>
-                                </div>
-                            </form>
+                            <a class="nav-link" href="{{ route('login') }}">Entrar</a>
                         </li>
-                    </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
+                        </li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Entrar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                            <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    Salir
                                 </a>
 
-                                <div class="dropdown-menu" role="menu">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        Salir
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </div>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </div>
+                        </li>
+                    @endif
+                </ul>
             </div>
         </nav>
         @yield('content')
@@ -85,17 +79,5 @@
 
     <!-- Scripts -->
     <script src="{{mix("js/app.js")}}"></script>
-    <!--
-    <script 
-        src="http://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous">
-    </script>
-    <script 
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" 
-        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" 
-        crossorigin="anonymous">
-    </script>
-    -->
 </body>
 </html>

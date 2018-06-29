@@ -13874,7 +13874,6 @@ module.exports = __webpack_require__(44);
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -13891,7 +13890,7 @@ window.Vue = __webpack_require__(37);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(40));
+Vue.component('responses', __webpack_require__(40));
 
 var app = new Vue({
   el: '#app'
@@ -48997,7 +48996,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
+Component.options.__file = "resources\\assets\\js\\components\\responses.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -49006,9 +49005,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0ca92eac", Component.options)
+    hotAPI.createRecord("data-v-507cf3ea", Component.options)
   } else {
-    hotAPI.reload("data-v-0ca92eac", Component.options)
+    hotAPI.reload("data-v-507cf3ea", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -49148,12 +49147,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
+  props: ["message"],
+  data: function data() {
+    return {
+      responses: []
+    };
+  },
+
+  methods: {
+    load: function load() {
+      var _this = this;
+
+      axios.get("/api/messages/" + this.message + "/responses").then(function (res) {
+        _this.responses = res.data;
+      });
     }
+  }
 });
 
 /***/ }),
@@ -49164,38 +49175,47 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card card-default" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "a",
+      {
+        staticClass: "btn btn-outline-primary",
+        attrs: { href: "#" },
+        on: { click: _vm.load }
+      },
+      [_vm._v("Ver respuestas")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-12" },
+      _vm._l(_vm.responses, function(response) {
+        return _c("div", { staticClass: "card mt-2" }, [
+          _c("div", { staticClass: "card-block" }, [
+            _vm._v(
+              "\n                " + _vm._s(response.message) + "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer text-muted" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(response.created_at) +
+                "\n            "
+            )
           ])
         ])
-      ])
-    ])
-  }
-]
+      })
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-507cf3ea", module.exports)
   }
 }
 

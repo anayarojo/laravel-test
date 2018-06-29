@@ -3,10 +3,10 @@
 @section("content")
 <h1 class="mt-3 mb-3">{{$user->name}}</h1>
 <a class="btn btn-link" href="/users/{{$user->username}}/follows">
-    Sigue a <span class="badge badge-default">{{$user->follows->count()}}</span>
+    Sigue a <span class="badge badge-primary">{{$user->follows->count()}}</span>
 </a>
 <a class="btn btn-link" href="/users/{{$user->username}}/followers">
-    Seguidores <span class="badge badge-default">{{$user->followers->count()}}</span>
+    Seguidores <span class="badge badge-primary">{{$user->followers->count()}}</span>
 </a>
 @if(Auth::check())
     @if(Gate::allows("dms", $user))

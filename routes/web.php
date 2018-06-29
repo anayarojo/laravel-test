@@ -28,6 +28,8 @@ Route::group(["middleware" => "auth"], function () {
     Route::get('/conversations/{conversation}', "UsersController@showConversation");
 });
 
+Route::get("/api/messages/{message}/responses", "MessagesController@responses");
+
 Route::get('/users/{username}/follows', "UsersController@follows");
 Route::get('/users/{username}/followers', "UsersController@followers");
 Route::get('/users/{username}', "UsersController@show");
