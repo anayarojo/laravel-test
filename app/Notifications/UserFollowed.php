@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use \Illuminate\Broadcasting\BroadcastManager;
 
 class UserFollowed extends Notification
 {
@@ -31,7 +32,7 @@ class UserFollowed extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', "database"];
     }
 
     /**
@@ -44,7 +45,7 @@ class UserFollowed extends Notification
     {
         return (new MailMessage)
             ->subject("You have a new follower")
-            ->greeting("Hello" . $notifiable->name)
+            ->greeting("Hello " . $notifiable->name)
             ->line("The user @" . $this->follower->username . " is following")
             ->action('Show profile', url('http://localhost:8000/users/' . $this->follower->username))
             ->salutation("Thanks for use anayarojo");
@@ -59,7 +60,13 @@ class UserFollowed extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            "follower" => $this->follower,
         ];
+    }
+
+    public function toBroadCast(){
+        return new BroadcastManager(
+            $this->toArray($notifiable)
+        );
     }
 }
